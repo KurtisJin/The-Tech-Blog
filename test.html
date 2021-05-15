@@ -41,7 +41,174 @@
   <main class="container container-fluid mt-5">
     {{{body}}}
   </main>
+  <div class = "container-sm text-center" style="width: 18rem">
+    <form class="login-form form-signin">
+      <h1 class = "h3 mb-3 mt-5 fw-normal">Please Sign In</h1>
+      <div class="mb-3">
+        <label class="form-label" for="email-login">email:</label>
+        <input class="form-control" type="text" id="email-login" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="password-login">password:</label>
+        <input class="form-control" type="password" id="password-login" />
+      </div>
+      <div class="mb-3 mt-5">
+        <button class="btn-primary btn mb-3" type="submit">login</button>
+        <p>(Note: You are automatically signed out after 1 min. idle time)</p>
+      </div>
+    
+      <div class = "mb-3">
+          <a href="/signup">Sign up instead?</a>
+    </div>
+      </div>  
+    </form>
+    <div class = "container-sm text-center" style="width: 18rem">
+      <form class="signup-form">
+         <h1 class = "h3 mt-5 fw-normal">Welcome!</h1>
+         <h1 class = "h3 mb-3 fw-normal">Sign-up here</h1>
+        <div class="mb-3">
+          <label class="form-label"  for="username-signup">username:</label>
+          <input class="form-control" type="text" id="username-signup" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label"  for="email-signup">email:</label>
+          <input class="form-control" type="text" id="email-signup" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="password-signup">password:</label>
+          <input class="form-control" type="password" id="password-signup" />
+        </div>
+        <div class="mb-3 mt-5">
+          <button class="btn-primary btn mb-3" type="submit">Sign Up!</button>
+        </div>
+      </form>
+      
+      </div>
+      
+    
+<div class="container">
+  <div class="col align-self-center">
+      <ul class="post-list list-group">
+          {{#each posts as |post|}}
 
+          <li class="list-group-item">
+
+              {{> post-info post}}
+
+          </li>
+
+          {{/each}}
+      </ul>
+  </div>
+</div>
+
+<div class= "container mt-3">
+
+  <section>
+      <h2>Create New Post</h2>
+  
+      <form class = "new-post-form">
+          <div class = "mb-3">
+              <label class="form-label" for="post-title"><strong>Title</strong></label>
+              <input class="form-control" type="text" id="post-title" name="post-title" />
+          </div>
+          <div class = "mb-3">
+              <label class="form-label" for="textbody">Post Text</label>
+              <textarea class = "form-control" rows = "5" id="textbody" name="textbody"></textarea> 
+                      </div>
+          <button class="btn-primary btn mb-3" type ="submit" class ="btn"><strong>Create Post</strong></button>
+      </form>
+  </section>
+  </div>
+  {{#if posts.length}}
+  
+  <div class = "container mt-3">
+  <section>
+    <h2>Your Posts</h2>
+    <ulclass="post-list list-group">
+      {{#each posts as |post|}}
+     
+      <li class = "list-group-item">
+         {{> post-info post}}
+         <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+      </li>
+      {{/each}}
+    </ul>
+  </section>
+  </div>
+  {{/if}}
+  
+  
+  <script src="/models/addPost.js"></script>
+
+  <div class="container">
+    <div class="card">
+      <article class="post card-body">
+  
+        <div class="title card-header h3 mt-2 fw-normal">
+          Edit Post
+        </div>
+  
+        <form class="edit-post-form">
+          <div>
+            <label class="form-label mt-3 mb-3" for="post-title">Title:</label>
+            <input name="post-title" type="text" value="{{post.title}}" />
+          </div>
+          <div>
+            <label class="form-label" for="post-text">Text:</label>
+            <textarea name="textbody" id="post-text" style="width: 18rem; height: 20rem"
+              type="text">{{post.textbody}}</textarea>
+          </div>
+          <div class = "container">
+            <button class="btn-primary btn mb-3" type="submit">Save post</button>
+            <button class="btn-primary btn mb-3 delete-post-btn" type="button">Delete post</button>
+          </div>
+        </form>
+      </article>
+  
+      <div class= "container">
+      <div class="title card-title h5 mt-2 fw-normal">
+        Comments:
+      </div>
+  
+  
+  
+      <form class="comment-form">
+        <div>
+          <textarea name="comment-body"></textarea>
+        </div>
+  
+        <div>
+          <button class="btn-primary btn mb-3" type="submit">add comment</button>
+        </div>
+      </form>
+  
+      <div>
+       
+      <p>{{post.comments.length}} {{format_plural "comment" post.comments.length}}:</p>
+      </div>
+       {{>comments post.comments}}
+  
+    </div>
+  </div>
+  </div>
+  <script src="/javascript/edit-post.js"></script>
+  <script src="/javascript/delete-post.js"></script>
+  <script src="/javascript/comment.js"></script>
+
+  {{#each this}}
+  <section class="comment card" style="width: 18rem;">
+    <div class = "body">
+      <div class="meta">
+        {{user.username}} on {{format_date created_at}}:
+      </div>
+      <div class="text">
+        {{comment_text}}
+      </div>
+    </div>
+  </section>
+  {{/each}}
+</div>
 <footer>
 
 Thank you for visiting!

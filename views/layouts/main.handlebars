@@ -11,25 +11,27 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-primary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><h2>TECH Blog</h2></a>
+        <a class="navbar-brand" href="/"><h2>TECH Blog</h2></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Dashboard</a>
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
             {{#if logged_in}}
             <li class="nav-item">
+              <a class="nav-link" href="/dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" id="logout">Logout</a>
             </li>
+            <span class="username">{{userName}}</span>
             {{else}}
             <li class="nav-item">
-              <a class="nav-link" href="/login">Login</a>  
+              <a class="nav-link" href="/login">Login</a>
+              <span class="not-logged-in">Please Login or Sign Up!</span>  
             </li>
             {{/if}}
           </ul>
@@ -49,7 +51,9 @@ Thank you for visiting!
 </footer>
 
 {{#if logged_in}}
-  <script src="/js/logout.js"></script>
-  {{/if}}
+  <script src="/public/js/logout.js"></script>
+{{/if}}
+
 </body>
+
 </html>
