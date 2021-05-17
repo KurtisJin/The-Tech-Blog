@@ -25,7 +25,10 @@ Post.init(
           model: 'user',
           key: 'id'
         }
-      }
+      },
+      textbody: {
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,

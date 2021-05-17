@@ -5,7 +5,7 @@ const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, async (req,res)=> {
     try {
-        // Get all projects and JOIN with user data
+      
         const post = await Post.findAll({
             where: {
                 user_id: req.session.user_id
@@ -18,24 +18,34 @@ router.get('/', withAuth, async (req,res)=> {
             include: [
                 {
                     model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', user_id, 'createdAt'],
+                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'createdAt'],
                     include: {
                         model: User,
-                        attributes: [username]
+                        attributes: ['username']
                     },
                 },
             ],
 
         });
+        // console.log(post);
         const posts = post.map(post => post.get({plain:true}));
-        console.log(posts)
+        // console.log(posts)
 
-        res.render('dashboard', {
-            posts,
-            loggedIn: req.session.logged_in,
-            userName: req.session.username,
-        });
+        // res.render('post', {
+        //     posts,
+        //     loggedIn: req.session.logged_in,
+        //     userName: req.session.username,
+        // res.render('postedInfo', {
+        //     layout: 'dashboard',
+        //     posts,
+        //   });
+        res.render('dashboard', { 
+            posts, 
+            logged_in: req.session.logged_in,
+            user_name: req.session.username,
+          });
     } catch(err) {
+        console.log(err);
         res.status(500).json(err);
     }
     
@@ -49,7 +59,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
             ],
             include: {
                 model: User,
-                attributes: [username],
+                attributes: ['username'],
             }
         });
         const posts = postData.map((post) => post.get({ plain: true }));
@@ -61,6 +71,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
         })
 
     } catch (err) {
+        console.log(err);
         res.status(500).json(err)
     };
 });

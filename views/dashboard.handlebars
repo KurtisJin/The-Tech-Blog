@@ -25,7 +25,7 @@
     {{#each posts as |post|}}
    
     <li class = "list-group-item">
-       {{> post-info post}}
+       <h3>{{post.title}}</h3>
        <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
     </li>
     {{/each}}
@@ -35,4 +35,4 @@
 {{/if}}
 
 
-<script src="/public/js/addPost.js"></script>
+<script src="/js/addPost.js"></script>

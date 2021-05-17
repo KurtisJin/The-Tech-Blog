@@ -1,5 +1,4 @@
-const { response } = require("express");
-
+console.log("hello world");
 const loginFormHandler = async (event) => {
     event.preventDefault();
   
@@ -9,6 +8,7 @@ const loginFormHandler = async (event) => {
   
     if (email && password) {
       // Send a POST request to the API endpoint
+      console.log(email, password);
       const response = await fetch('/api/users/login', {
   
         method: 'POST',
