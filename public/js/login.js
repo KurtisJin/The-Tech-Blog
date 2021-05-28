@@ -1,4 +1,3 @@
-console.log("hello world");
 const loginFormHandler = async (event) => {
     event.preventDefault();
   

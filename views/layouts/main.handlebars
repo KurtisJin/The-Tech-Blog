@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link href="/css/style.css"
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
@@ -21,17 +22,17 @@
               <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
             {{#if logged_in}}
-            <li class="nav-item">
+            <li class="nav-item  text-right">
               <a class="nav-link" href="/dashboard">Dashboard</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item  text-right">
               <a class="nav-link" id="logout">Logout</a>
             </li>
             <span class="username">{{userName}}</span>
             {{else}}
-            <li class="nav-item">
+            <li class="nav-item  text-right">
               <a class="nav-link" href="/login">Login</a>
-              <span class="not-logged-in">Please Login or Sign Up!</span>  
+              {{!-- <span class="not-logged-in">Please Login or Sign Up!</span>   --}}
             </li>
             {{/if}}
           </ul>
@@ -44,11 +45,14 @@
     {{{body}}}
   </main>
 
-<footer>
-
-Thank you for visiting!
-
-</footer>
+<div class="card-body bg-primary text-center">
+    <h5 class="card-title">Thank you for visiting</h5>
+    <p class="card-text">Please login or create a new account by signing up</p>
+    <a href="/" class="btn btn-primary">Home</a>
+    <a href="/login" class="btn btn-primary">Login</a>
+    <a href="/signup" class="btn btn-primary">Signup</a>
+  </div>
+  <div class="card-footer text-muted">
 
 {{#if logged_in}}
   <script src="/js/logout.js"></script>
