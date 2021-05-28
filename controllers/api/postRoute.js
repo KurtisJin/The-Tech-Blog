@@ -4,11 +4,12 @@ const { Post, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.get('/', async (req, res) => {
+  // console.log("I AM IN POST ROUTE");
   try {
     // Get all projects and JOIN with user data
     const postData = await Post.findAll({
       attributes: [
-        'id', 'textbody', 'title', 'createdAt'
+        'id', 'title', 'textbody' , 'createdAt'
       ],
       order: [['createdAt', 'DESC']],
       include: [
@@ -30,7 +31,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const postData = await post.findByPk(req.params.id, {
+    const postData = await Post.findByPk(req.params.id, {
       attributes: [
         'id',
         'textbody',
@@ -56,12 +57,15 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', withAuth, async (req, res) => {
+  console.log(req.body)
   try {
     const newPost = await Post.create({
-      ...req.body,
-      user_id: req.session.user_id,
+      title: req.body.title,
+      textbody: req.body.textbody,
+      user_id: req.session.user_id
     });
-
+  
+    // console.log(newPost);
     res.status(200).json(newPost);
   } catch (err) {
     res.status(400).json(err);
@@ -71,8 +75,13 @@ router.post('/', withAuth, async (req, res) => {
 router.put('/:id', withAuth, async (req, res) => {
   try {
     const updatePost = await Post.update({
-      ...req.body,
-      user_id: req.session.user_id,
+      title: req.body.title,
+      textbody: req.body.textbody,
+      
+        where: {
+          id: req.paramas.id
+        }
+      
     });
 
     res.status(200).json(updatePost);

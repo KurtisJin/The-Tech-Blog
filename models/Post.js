@@ -15,9 +15,9 @@ Post.init(
         type: DataTypes.STRING,
         allowNull: false
       },
-      content: {
+      textbody: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
       },
       user_id: {
         type: DataTypes.INTEGER,
@@ -25,9 +25,6 @@ Post.init(
           model: 'user',
           key: 'id'
         }
-      },
-      textbody: {
-        type: DataTypes.STRING,
       },
     },
     {
