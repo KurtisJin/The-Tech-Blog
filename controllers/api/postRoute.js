@@ -1,12 +1,11 @@
 const router = require('express').Router();
-const sequelize = require('../../config/connections');
+const sequelize = require('../../config/connection');
 const { Post, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.get('/', async (req, res) => {
   // console.log("I AM IN POST ROUTE");
   try {
-    // Get all projects and JOIN with user data
     const postData = await Post.findAll({
       attributes: [
         'id', 'title', 'textbody' , 'createdAt'
